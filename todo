@@ -1,6 +1,9 @@
-//Todo
+//Todo.
 //here are the things that I would have liked to do but didn't because of the time
 
 //1. Add a modal to confirm you want to delete or cancel
-//2. Add more validations
+//2. Add more validations so text is not needed in the create and update (colors to the textfields or something to let the user know)
 //3. Move code that repeats to a utils class
+//4. Have update and delete button in each item from the widget list would allow me to remove update button and delete button
+//5. In the single widget (search) add an autocomplete
+//6. Add more css styles to make it look cohesive
