@@ -5,7 +5,9 @@ import Stack from "@mui/material/Stack";
 import WidgetList from "./components/WidgetList";
 import { Button, Typography } from "@mui/material";
 import CreateWidget from "./components/CreateWidget";
+import DeleteWidget from "./components/DeleteWidget";
 import SingleWidget from "./components/SingleWidget";
+import UpdateWidget from "./components/UpdateWidget";
 
 const App = (): JSX.Element => {
   const [displayView, setDisplayView] = useState("");
@@ -90,8 +92,8 @@ const App = (): JSX.Element => {
         {displayView === "WidgetList" && <WidgetList />}
         {displayView === "SingleWidget" && <SingleWidget />}
         {displayView === "CreateWidget" && <CreateWidget />}
-        {displayView === "UpdateWidget" && <CreateWidget />}
-        {displayView === "DeleteWidget" && <CreateWidget />}
+        {displayView === "UpdateWidget" && <UpdateWidget />}
+        {displayView === "DeleteWidget" && <DeleteWidget />}
       </Stack>
     </Stack>
   );

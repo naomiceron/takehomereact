@@ -25,6 +25,9 @@ const SingleWidget = (): JSX.Element => {
       spacing={4}
       sx={{ margin: "auto", maxWidth: 900, paddingTop: "4em", width: "100%" }}
     >
+      <Typography sx={{ textAlign: "center" }} variant="h3">
+        Search for a widget:
+      </Typography>
       <Typography variant="body1">
         Please type in the name of the widget you want to search for:
       </Typography>
