@@ -6,6 +6,12 @@ This [Create React App](https://github.com/facebook/create-react-app) project is
 
 Node 20 -- Node can be acquired using [Node Version Manager](https://github.com/nvm-sh/nvm)
 
+## Install dependencies
+
+In the project directory, you can run:
+
+### `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
