@@ -1,14 +1,11 @@
-import { render } from '@testing-library/react'
-import App from './App'
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-import WidgetList from './components/WidgetList'
+jest.mock("./components/WidgetList");
 
-jest.mock('./components/WidgetList')
-
-describe('App', () => {
-  it('renders WidgetList', () => {
-    render(<App />)
-
-    expect(WidgetList).toHaveBeenCalled()
-  })
-})
+describe("App", () => {
+  it("renders App", () => {
+    render(<App />);
+    expect(screen.getByText("Take home challenge")).toBeVisible();
+  });
+});

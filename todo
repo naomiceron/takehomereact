@@ -7,3 +7,4 @@
 //4. Have update and delete button in each item from the widget list would allow me to remove update button and delete button
 //5. In the single widget (search) add an autocomplete
 //6. Add more css styles to make it look cohesive
+//7. Add more unit tests on different scenarios (sending requests with mocks, fail scenarios, etc.)
