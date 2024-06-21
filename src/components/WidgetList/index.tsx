@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import WidgetDisplay from "../WidgetDisplay";
+import DisplayWidget from "../WidgetDisplay";
 import { fetchAllWidgets, Widget } from "../../lib/apiConnect";
 
 const WidgetList = (): JSX.Element => {
@@ -31,7 +31,7 @@ const WidgetList = (): JSX.Element => {
       >
         {widgets.map((current, index) => (
           <Grid item xs={12} sm={6} key={index}>
-            <WidgetDisplay widget={current} />
+            <DisplayWidget widget={current} />
           </Grid>
         ))}
       </Grid>

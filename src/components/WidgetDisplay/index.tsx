@@ -1,21 +1,21 @@
-import React from 'react'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
+import React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { Widget } from '../../lib/apiConnect'
+import { Widget } from "../../lib/apiConnect";
 
 export interface DisplayWidgetProps {
-  widget: Widget
+  widget: Widget;
 }
 
 const DisplayWidget = ({ widget }: DisplayWidgetProps): JSX.Element => {
-  const { description, name, price } = widget
+  const { description, name, price } = widget;
   return (
-    <Grid item xs={6}>
-      <Card>
+    <Grid item xs={12}>
+      <Card sx={{ width: "100%" }}>
         <CardContent>
           <Stack spacing={2}>
             <Typography component="div" gutterBottom variant="h4">
@@ -30,7 +30,8 @@ const DisplayWidget = ({ widget }: DisplayWidgetProps): JSX.Element => {
           </Stack>
         </CardContent>
       </Card>
-  </Grid>)
-}
+    </Grid>
+  );
+};
 
-export default DisplayWidget
+export default DisplayWidget;

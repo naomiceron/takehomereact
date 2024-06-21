@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { createWidget, Widget } from "../../lib/apiConnect";
@@ -8,6 +8,11 @@ const CreateWidget = (): JSX.Element => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidDescription, setIsValidDescription] = useState(false);
+  const [isValidPrice, setIsValidPrice] = useState(false);
+
   const [widgetResult, setWidgetResult] = useState<Widget>();
   const [widgetError, setWidgetError] = useState();
 
@@ -28,6 +33,36 @@ const CreateWidget = (): JSX.Element => {
       });
   };
 
+  const validateName = (name: string) => {
+    setIsValidName(name.length >= 3 && name.length <= 100);
+  };
+
+  const validateDescription = (description: string) => {
+    setIsValidDescription(
+      description.length >= 5 && description.length <= 1000
+    );
+  };
+
+  const validatePrice = (price: number) => {
+    const isValid =
+      price >= 1 &&
+      price <= 20000 &&
+      /^\d+(\.\d{1,2})?$/.test(price.toString());
+    setIsValidPrice(isValid);
+  };
+
+  useEffect(() => {
+    validateName(name);
+  }, [name]);
+
+  useEffect(() => {
+    validateDescription(description);
+  }, [description]);
+
+  useEffect(() => {
+    validatePrice(price);
+  }, [price]);
+
   return (
     <Stack
       spacing={4}
@@ -38,6 +73,12 @@ const CreateWidget = (): JSX.Element => {
       </Typography>
       <Typography variant="body1">
         Please type in the name, description and price of the widget:
+      </Typography>
+      <Typography variant="body2">
+        Note: Name should have at least 3 characters and at most 100 characters.
+        Description should have at least 5 characters and at most 1000
+        characters. Price should be between 1 and 20000 and have at most 2
+        decimal places.
       </Typography>
       <Stack direction="row" spacing={2}>
         <Stack direction="column" spacing={4}>
@@ -79,6 +120,7 @@ const CreateWidget = (): JSX.Element => {
             id="CreateWidget"
             variant="contained"
             color="primary"
+            disabled={!isValidName || !isValidDescription || !isValidPrice}
             onClick={() => handleCreate(name, description, price)}
             sx={{
               display: "block",

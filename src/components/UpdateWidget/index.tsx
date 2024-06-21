@@ -13,9 +13,14 @@ import { fetchAllWidgets, updateWidget, Widget } from "../../lib/apiConnect";
 const UpdateWidget = (): JSX.Element => {
   const [widgets, setWidgets] = useState<Widget[]>([]);
   const [selectedWidget, setSelectedWidget] = useState<Widget | null>(null);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+
+  const [isValidDescription, setIsValidDescription] = useState(false);
+  const [isValidPrice, setIsValidPrice] = useState(false);
+
   const [widgetResult, setWidgetResult] = useState<Widget | undefined>();
   const [widgetError, setWidgetError] = useState<any>();
 
@@ -57,6 +62,28 @@ const UpdateWidget = (): JSX.Element => {
       });
   };
 
+  const validateDescription = (description: string) => {
+    setIsValidDescription(
+      description.length >= 5 && description.length <= 1000
+    );
+  };
+
+  const validatePrice = (price: number) => {
+    const isValid =
+      price >= 1 &&
+      price <= 20000 &&
+      /^\d+(\.\d{1,2})?$/.test(price.toString());
+    setIsValidPrice(isValid);
+  };
+
+  useEffect(() => {
+    validateDescription(description);
+  }, [description]);
+
+  useEffect(() => {
+    validatePrice(price);
+  }, [price]);
+
   return (
     <Stack
       spacing={4}
@@ -91,56 +118,65 @@ const UpdateWidget = (): JSX.Element => {
       </Grid>
 
       {selectedWidget && (
-        <Stack direction="row" spacing={2}>
-          <Stack direction="column" spacing={4}>
-            <TextField
-              id="outlined-basic"
-              label="Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              sx={{
-                height: "40px",
-                width: "200px",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Description"
-              variant="outlined"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              sx={{
-                height: "40px",
-                width: "200px",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Price"
-              variant="outlined"
-              onChange={(e) => setPrice(Number(e.target.value))}
-              value={price}
-              type="number"
-              sx={{
-                height: "40px",
-                width: "200px",
-              }}
-            />
-            <Button
-              id="SaveUpdateWidget"
-              variant="contained"
-              color="primary"
-              onClick={() => handleSaveChanges()}
-              sx={{
-                display: "block",
-                margin: "auto",
-              }}
-            >
-              Save Changes
-            </Button>
+        <>
+          <Typography variant="body2">
+            Note: Name can't be modified. Description should have at least 5
+            characters and at most 1000 characters. Price should be between 1
+            and 20000 and have at most 2 decimal places.
+          </Typography>
+          <Stack direction="row" spacing={2}>
+            <Stack direction="column" spacing={4}>
+              <TextField
+                disabled
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                sx={{
+                  height: "40px",
+                  width: "200px",
+                }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Description"
+                variant="outlined"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                sx={{
+                  height: "40px",
+                  width: "200px",
+                }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Price"
+                variant="outlined"
+                onChange={(e) => setPrice(Number(e.target.value))}
+                value={price}
+                type="number"
+                sx={{
+                  height: "40px",
+                  width: "200px",
+                }}
+              />
+              <Button
+                id="SaveUpdateWidget"
+                variant="contained"
+                color="primary"
+                disabled={!isValidDescription || !isValidPrice}
+                onClick={() => handleSaveChanges()}
+                sx={{
+                  display: "block",
+                  margin: "auto",
+                }}
+              >
+                Save Changes
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
+        </>
       )}
 
       {widgetResult && (
